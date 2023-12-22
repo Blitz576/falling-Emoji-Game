@@ -1,26 +1,17 @@
-window.addEventListener("load",function(){
+window.addEventListener("load", function () {
 
-  let  startButton = this.document.querySelector(".start");
-   userName = this.document.querySelector("input");
-   
+  let startButton = this.document.querySelector(".start");
+  let userName = this.document.querySelector("input");
 
-   userName.addEventListener("input",function(){
-       if(userName.value.trim())
-           startButton.style.opacity=1;
-       else {
-         startButton.style.opacity=0.5;
-       } 
 
-   })
-   
-   if(userName.value.trim())
-           startButton.style.opacity=1;
-       else {
-         startButton.style.opacity=0.5;
-       } 
-      
-  startButton.addEventListener("click",function(){
-    if(userName.value.trim())
-       window.location.href="../GamePage.html";
-  })
-})
+  userName.addEventListener("input", function () {
+    changeOpacity(userName, startButton);
+  });
+
+  changeOpacity(userName, startButton);
+
+  startButton.addEventListener("click", function () {
+    if (userName.value.trim())
+      window.location.href = "../GamePage.html";
+  });
+});
