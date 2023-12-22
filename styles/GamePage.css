@@ -23,7 +23,7 @@ img{
     display: inline-block;
     padding: 20px;
 }
-#timer{
+.timer{
     width: 80px;
     height: 40px;
     background-color: #c4bebe;
