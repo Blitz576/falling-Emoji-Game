@@ -12,6 +12,7 @@ window.addEventListener("load", function () {
 
   startButton.addEventListener("click", function () {
     if (userName.value.trim())
+      window.localStorage.setItem("Player-Name",userName.value);
       window.location.href = "../GamePage.html";
   });
 });

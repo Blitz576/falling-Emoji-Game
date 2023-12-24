@@ -1,13 +1,15 @@
 window.addEventListener("load", function () {
     let startButton = document.querySelector("button");
-    let parent = document.querySelector("#container");
+    let buttonParent = document.querySelector("#container");
+
+    let nameDiv = this.document.querySelector("#username");
+    nameDiv.innerHTML+=localStorage.getItem("Player-Name");
 
     let time = 120;
     startButton.addEventListener("click", function () {
-
-        parent.removeChild(startButton);
+        buttonParent.removeChild(startButton);
         var timerDiv = document.createElement("div");
-        parent.appendChild(timerDiv);
+        buttonParent.appendChild(timerDiv);
         timerDiv.classList.add("timer")
 
         let id=setInterval(function () {
