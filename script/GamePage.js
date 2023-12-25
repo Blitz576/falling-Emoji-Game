@@ -1,14 +1,20 @@
 window.addEventListener("load", function () {
     let startButton = document.querySelector("button");
-    let parent = document.querySelector("#container");
+    let buttonParent = document.querySelector("#container");
+    let clickSound= this.document.querySelector('#click_sound');
+    let nameDiv = this.document.querySelector("#username");
+    nameDiv.innerHTML+=localStorage.getItem("Player-Name");
 
     let time = 120;
     startButton.addEventListener("click", function () {
-
-        parent.removeChild(startButton);
+        clickSound.play();
+        
+        clickSound.addEventListener("ended",function(){ 
+        
+        buttonParent.removeChild(startButton);
         var timerDiv = document.createElement("div");
-        parent.appendChild(timerDiv);
         timerDiv.classList.add("timer")
+        buttonParent.appendChild(timerDiv);
 
         let id=setInterval(function () {
             countDownTimer(time,timerDiv);
@@ -22,4 +28,5 @@ window.addEventListener("load", function () {
             // countDownTimer(120,timer);
         }, 1000)
     })
+})
 })

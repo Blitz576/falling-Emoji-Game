@@ -19,3 +19,22 @@ function countDownTimer(time, element) {
 }
 
 
+const changeSoundButtonState=function(source,music)
+{
+       
+       if(source == "images/sound.png"){
+           music.pause();
+           return "images/no-sound.png";
+        }
+        
+        else if (source == "images/no-sound.png"){
+         music.play();
+         return "images/sound.png";
+       }
+        else 
+         return "";
+
+}
+
+
+

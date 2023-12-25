@@ -1,6 +1,17 @@
 body{
     background-color: rgb(255, 255, 209);
 }
+
+#username{
+    width: 250px;
+    height: 30px;
+    background-color: rgb(255, 255, 150);
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 20px;
+    padding: 15px;
+}
+
 #board{
     background-color: #c4bebe;
     width: 500px;
