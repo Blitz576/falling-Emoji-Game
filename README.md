@@ -25,7 +25,7 @@ The Falling Emoji Game is designed with a home page where the player can enter t
 - `styles/`: Contains the CSS files.
 - `script/`: Contains the JavaScript files.
 - `images/`: Stores the game images.
-- `styles/` :Stores the sound Effects and music
+- `audio/` :Stores the sound Effects and music
 - `homePage.html`: Home page.
 - `gamePage.html`: Game page.
 
