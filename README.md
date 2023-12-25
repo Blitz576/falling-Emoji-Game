@@ -23,7 +23,7 @@ The Falling Emoji Game is designed with a home page where the player can enter t
 ## Folder Structure
 
 - `styles/`: Contains the CSS files.
-- `scripts/`: Contains the JavaScript files.
+- `script/`: Contains the JavaScript files.
 - `images/`: Stores the game images.
 - `styles/` :Stores the sound Effects and music
 - `homePage.html`: Home page.
