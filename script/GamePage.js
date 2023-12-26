@@ -102,8 +102,9 @@ window.addEventListener("load", function () {
                 my_image= createRandomImage();
                 column=settingNewPosition(grid,my_image);
                 grid[row][column].removeImage();
-                grid[++row][column].appendImage(my_image);
-
+                
+                if(!grid[1][column].isEmpty())
+                 clearInterval(id);
             }
             console.log("timer is on ");
             if(time>0){
