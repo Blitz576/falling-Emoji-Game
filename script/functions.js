@@ -75,18 +75,12 @@ const lowerBoundry=function(row){
        row++;
     return row;
 }
-<<<<<<< HEAD
 
 const checkCollisionVertical=function(grid,row,column){
+        
     
-    if(grid[row][column]==grid[row+1][column]==grid[row+2][column]==grid[row+3][column]){
-        grid[row][column].removeImage();
-        grid[row+1][column].removeImage();
-        grid[row+2][column].removeImage();
-        grid[row+3][column].removeImage();
-    }
 }
-const checkCollisionHorizontally=function(){
+const checkCollisionHorizontally=function(grid,row,column){
     if(grid[row][column]==grid[row][column+1]==grid[row][column+2]==grid[row][column+3]){
         grid[row][column].removeImage();
         grid[row][column+1].removeImage();
@@ -94,5 +88,4 @@ const checkCollisionHorizontally=function(){
         grid[row][column+3].removeImage();
     }
 }
-=======
->>>>>>> 937486e82e7c728ec523aedb35b0af981a79b2cb
+

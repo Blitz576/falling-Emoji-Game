@@ -13,7 +13,7 @@ window.addEventListener("load", function () {
     
     let parent=this.document.querySelector("#board");
     let my_image= createRandomImage(); 
-    let grid=fillTheGrid(10,10,parent);
+    let grid=fillTheGrid(11,10,parent);
     //childo.appendImage(my_image); //pushing into the parent div
     
     let column=settingNewPosition(grid,my_image);
@@ -84,39 +84,62 @@ window.addEventListener("load", function () {
                     grid[row][column].appendImage(my_image);
                 }
             }
-            if(grid[row][column]==grid[row+1][column]==grid[row+2][column]==grid[row+3][column]){
-                grid[row][column].removeImage();
-                grid[row+1][column].removeImage();
-                grid[row+2][column].removeImage();
-                grid[row+3][column].removeImage();
+
+            //// -----------------------test test-----------
+            else if(event.key ==="ArrowDown"){
+                if(row<10 && grid[lowerBoundry(row)][column].isEmpty()){
+                    grid[row][column].removeImage();  //element is removed from that parent
+                    
+                    grid[++row][column].appendImage(my_image);
+                  } 
+                 else if(row >= 10 || !grid[lowerBoundry(row)][column].isEmpty())
+                  {
+                      row =0;
+                      //changing the image and the column values 
+                      my_image= createRandomImage();
+                      column=settingNewPosition(grid,my_image);
+                      grid[row][column].removeImage();
+                      grid[row][column].appendImage(my_image);
+      
+      
+                      
+                    //   if(!grid[1][column].isEmpty())
+                    //    clearInterval(id);
+                  }
             }
-            checkCollisionVertical(grid,row,column);
+            // if(grid[row][column]==grid[row+1][column]==grid[row+2][column]==grid[row+3][column]){
+            //     grid[row][column].removeImage();
+            //     grid[row+1][column].removeImage();
+            //     grid[row+2][column].removeImage();
+            //     grid[row+3][column].removeImage();
+            // }
+            // checkCollisionVertical(grid,row,column);
         });    
         
         
         let id=setInterval(function () {
             countDownTimer(time,timerDiv);
             
+            
             if(row<10 && grid[lowerBoundry(row)][column].isEmpty()){
-              grid[row][column].removeImage();  //element is removed from that parent
-              
-              grid[++row][column].appendImage(my_image);
+                grid[row][column].removeImage();  //element is removed from that parent
+                
+                grid[++row][column].appendImage(my_image);
             } 
-           else if(row >= 10 || !grid[lowerBoundry(row)][column].isEmpty())
+            else if(row >= 10 || !grid[lowerBoundry(row)][column].isEmpty())
             {
+                checkCollisionVertical(grid,row,column);
                 row =0;
                 //changing the image and the column values 
                 my_image= createRandomImage();
                 column=settingNewPosition(grid,my_image);
                 grid[row][column].removeImage();
-<<<<<<< HEAD
                 grid[row][column].appendImage(my_image);
-
-=======
+                
+                
                 
                 if(!grid[1][column].isEmpty())
                  clearInterval(id);
->>>>>>> 937486e82e7c728ec523aedb35b0af981a79b2cb
             }
             console.log("timer is on ");
             if(time>0){
