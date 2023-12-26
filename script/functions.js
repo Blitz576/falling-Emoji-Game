@@ -75,3 +75,21 @@ const lowerBoundry=function(row){
        row++;
     return row;
 }
+
+const checkCollisionVertical=function(grid,row,column){
+    
+    if(grid[row][column]==grid[row+1][column]==grid[row+2][column]==grid[row+3][column]){
+        grid[row][column].removeImage();
+        grid[row+1][column].removeImage();
+        grid[row+2][column].removeImage();
+        grid[row+3][column].removeImage();
+    }
+}
+const checkCollisionHorizontally=function(){
+    if(grid[row][column]==grid[row][column+1]==grid[row][column+2]==grid[row][column+3]){
+        grid[row][column].removeImage();
+        grid[row][column+1].removeImage();
+        grid[row][column+2].removeImage();
+        grid[row][column+3].removeImage();
+    }
+}

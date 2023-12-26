@@ -84,6 +84,13 @@ window.addEventListener("load", function () {
                     grid[row][column].appendImage(my_image);
                 }
             }
+            if(grid[row][column]==grid[row+1][column]==grid[row+2][column]==grid[row+3][column]){
+                grid[row][column].removeImage();
+                grid[row+1][column].removeImage();
+                grid[row+2][column].removeImage();
+                grid[row+3][column].removeImage();
+            }
+            checkCollisionVertical(grid,row,column);
         });    
         
         
@@ -102,7 +109,7 @@ window.addEventListener("load", function () {
                 my_image= createRandomImage();
                 column=settingNewPosition(grid,my_image);
                 grid[row][column].removeImage();
-                grid[++row][column].appendImage(my_image);
+                grid[row][column].appendImage(my_image);
 
             }
             console.log("timer is on ");
