@@ -88,9 +88,10 @@ window.addEventListener("load", function () {
         let id=setInterval(function () {
             countDownTimer(time,timerDiv);
             
-            grid[row++][column].appendImage(my_image);
-            
-            if(row > 10)
+            if(row<10){
+              grid[row++][column].appendImage(my_image);
+            }
+            if(row >= 10)
             {
                 row =0;
                 //changing the image and the column values 
