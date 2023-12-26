@@ -75,6 +75,7 @@ const lowerBoundry=function(row){
        row++;
     return row;
 }
+<<<<<<< HEAD
 
 const checkCollisionVertical=function(grid,row,column){
     
@@ -93,3 +94,5 @@ const checkCollisionHorizontally=function(){
         grid[row][column+3].removeImage();
     }
 }
+=======
+>>>>>>> 937486e82e7c728ec523aedb35b0af981a79b2cb
