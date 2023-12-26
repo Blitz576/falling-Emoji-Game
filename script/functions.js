@@ -82,9 +82,12 @@ const checkCollisionVertical=function(grid,row,column){
 
    for(let r = row; r<grid.length -1;r++)
    {
-     if(grid[r][column] == grid[r+1][column])
-         vecticalCounter++;    //counter of vectical emoji elemnts  
+
+     if(grid[r][column] == grid[r+1][column]){
+         vecticalCounter++;    //counter of vectical emoji elemnts
+     }  
    }
+
    console.log(vecticalCounter);        
     
 }
