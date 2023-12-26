@@ -1,30 +1,99 @@
 window.addEventListener("load", function () {
     let startButton = document.querySelector("button");
     let buttonParent = document.querySelector("#container");
+    let easyModeButton = this.document.querySelector(".easy_mode");
+    let hardModeButton = this.document.querySelector(".hard_mode");
+
+
     let gameSound =  this.document.querySelector("#game_play")
-    let clickSound= this.document.querySelector('#click_sound');
+    let click_sound = this.document.querySelector('#click_sound');
+    
     let nameDiv = this.document.querySelector("#username");
     nameDiv.innerHTML+=localStorage.getItem("Player-Name");
     
+    let parent=this.document.querySelector("#board");
+    let my_image= createRandomImage(); 
+    let grid=fillTheGrid(10,10,parent);
+    //childo.appendImage(my_image); //pushing into the parent div
     
+   let column=settingNewPosition(grid,my_image);
+   let row = 0;
+    
+   
+   
 
 
+
+   //Easy mode
+   easyModeButton.addEventListener("click",function(){
+    hardModeButton.style.backgroundColor="transparent";
+    hardModeButton.style.color="black";
+    easyModeButton.style.backgroundColor="green";
+    easyModeButton.style.color="white";
+    //change the song source
+    gameSound.src="audio/Dancing Line - The Plains (Soundtrack).mp3"; 
+   })
+   
+
+   //Hard mode
+   hardModeButton.addEventListener("click",function(){
+    easyModeButton.style.backgroundColor="transparent";
+    easyModeButton.style.color="black";
+    hardModeButton.style.backgroundColor="red";
+    hardModeButton.style.color="white";
+
+    //change the song source
+    gameSound.src="audio/Dancing Line - The Chaos (Soundtrack).mp3"; 
+   })
+
+  
     let time = 120;
     startButton.addEventListener("click", function () {
-        clickSound.play();
-        
-        clickSound.addEventListener("ended",function(){     
-        gameSound.play();      
+        click_sound.play();
+        //after ending of the play
+        click_sound.addEventListener("ended",function(){
+        console.log(gameSound.children[0].src);             
+        gameSound.play();
+        console.log(gameSound.children[0].src);      
         buttonParent.removeChild(startButton);
+       
+        //adding timer
         var timerDiv = document.createElement("div");
         timerDiv.classList.add("timer")
         buttonParent.appendChild(timerDiv);
 
+        //movement of the image
+       document.addEventListener("keydown", function (event) {
+            if (event.key === "ArrowRight") {
+                console.log("right")
+                // Check if moving to the right is allowed (within the grid)
+                if (column < 9) {
+                    column++;
+                    grid[row][column].appendImage(my_image);
+                }
+            }
+            // Keydown event to move the image to the left
+            else if (event.key === "ArrowLeft") {
+                // Check if moving to the left is allowed (within the grid)
+                if (column > 0) {
+                    column--;
+                    grid[row][column].appendImage(my_image);
+                }
+            }
+        });    
+        
+        
+
         let id=setInterval(function () {
             countDownTimer(time,timerDiv);
-            if(time>0){
+            
+            grid[row++][column].appendImage(my_image);
+            
+            if(time>0 && row < 10){
                 time-=1;
             }else{
+                gameSound.pause();
+                gameSound.currentTime=0; //restarting the song
                 clearInterval(id);
             }
             
@@ -33,4 +102,7 @@ window.addEventListener("load", function () {
         }, 1000)
     })
 })
+
+
+
 })

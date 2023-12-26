@@ -36,5 +36,32 @@ const changeSoundButtonState=function(source,music)
 
 }
 
+const createRandomImage=function(){
+    let image=this.document.createElement("img");
+    let imageSrcIndex= Math.ceil(5*Math.random()); //from 1 to 5
+    console.log(imageSrcIndex);
+    image.src=`images/${imageSrcIndex}.png`;
+    return image;
+}
 
+const fillTheGrid =function(rows,columns,parent){
+    
+    let grid=[]; //intial matrix
+    for(let i=0;i<rows;i++){
+        grid[i]=[];  //each element is an array
+        for(let j=0;j<columns;j++){
+            let childo= new Cell();  //creating new child class each time
+            childo.appendToParent(parent);
+            grid[i][j]=childo;
+        }
+}
 
+ return grid;
+}
+
+const settingNewPosition =  function(grid , image){
+    let columnPosition = Math.round( Math.random()* grid.length);
+    
+    grid[0][columnPosition].appendImage(image);
+    return columnPosition;
+}

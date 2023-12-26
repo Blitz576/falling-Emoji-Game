@@ -34,7 +34,8 @@ window.addEventListener("load", function () {
       
   scoreBoardButton.addEventListener("click",function(){
    clickSound.play();
-   clickSound.addEventListener("ended",function(){
+    clickSound.addEventListener("ended",function(){
+     
     console.log("sucess");
    })    
   })   
