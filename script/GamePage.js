@@ -18,7 +18,7 @@ window.addEventListener("load", function () {
     
     let column=settingNewPosition(grid,my_image);
     let row = 0;
-    grid[row][column].flag=false;
+    grid[row][column].removeImage();
     
 
    
@@ -53,10 +53,10 @@ window.addEventListener("load", function () {
     startButton.addEventListener("click", function () {
         click_sound.play();
         //after ending of the play
-        click_sound.addEventListener("ended",function(){
-        console.log(gameSound.children[0].src);             
+        click_sound.addEventListener("ended",function(){             
+        
         gameSound.play();
-        console.log(gameSound.children[0].src);      
+              
         buttonParent.removeChild(startButton);
        
         //adding timer
@@ -70,7 +70,7 @@ window.addEventListener("load", function () {
                 console.log("right")
                 // Check if moving to the right is allowed (within the grid)
                 if (column < 9) {
-                    grid[row][column].flag=false;
+                    grid[row][column].removeImage();
                     column++;
                     grid[row][column].appendImage(my_image);
                 }
@@ -79,7 +79,7 @@ window.addEventListener("load", function () {
             else if (event.key === "ArrowLeft") {
                 // Check if moving to the left is allowed (within the grid)
                 if (column > 0) {
-                    grid[row][column].flag=false;
+                    grid[row][column].removeImage()
                     column--;
                     grid[row][column].appendImage(my_image);
                 }
@@ -91,8 +91,8 @@ window.addEventListener("load", function () {
             countDownTimer(time,timerDiv);
             
             if(row<10 && grid[lowerBoundry(row)][column].isEmpty()){
-              grid[row][column].flag=false;  //element is removed from that parent
-              console.log(grid[row][column].flag);
+              grid[row][column].removeImage();  //element is removed from that parent
+              
               grid[++row][column].appendImage(my_image);
             } 
            else if(row >= 10 || !grid[lowerBoundry(row)][column].isEmpty())
@@ -101,7 +101,7 @@ window.addEventListener("load", function () {
                 //changing the image and the column values 
                 my_image= createRandomImage();
                 column=settingNewPosition(grid,my_image);
-                grid[row][column].flag=false;
+                grid[row][column].removeImage();
                 grid[++row][column].appendImage(my_image);
 
             }

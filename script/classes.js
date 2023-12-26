@@ -1,6 +1,6 @@
 class Cell{
     //#flag;
-    static flag;
+    //static flag;
     constructor(){
         this.cell=document.createElement("div");
         this.cell.style.width="50px";
@@ -12,11 +12,15 @@ class Cell{
     appendToParent(parent){
       parent.appendChild(this.cell);
     }
+    removeImage(){
+      this.flag=0;
+    }
     appendImage(image){
         this.flag=1;
         this.imageIndex = this.imageSources.indexOf(image.attributes.src);
         this.cell.appendChild(image);
     }
+    
     
 
     cellImageNumber(){
