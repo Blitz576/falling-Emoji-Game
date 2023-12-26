@@ -1,5 +1,6 @@
 class Cell{
     //#flag;
+    static flag;
     constructor(){
         this.cell=document.createElement("div");
         this.cell.style.width="50px";

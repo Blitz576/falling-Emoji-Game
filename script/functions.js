@@ -65,3 +65,13 @@ const settingNewPosition =  function(grid , image){
     grid[0][columnPosition].appendImage(image);
     return columnPosition;
 }
+
+const lowerBoundry=function(row){
+     if(row+1==10)
+       row=row;
+    else if(row+1 >10)
+        row--;
+    else
+       row++;
+    return row;
+}

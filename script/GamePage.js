@@ -16,8 +16,9 @@ window.addEventListener("load", function () {
     let grid=fillTheGrid(10,10,parent);
     //childo.appendImage(my_image); //pushing into the parent div
     
-   let column=settingNewPosition(grid,my_image);
-   let row = 0;
+    let column=settingNewPosition(grid,my_image);
+    let row = 0;
+    grid[row][column].flag=false;
     
 
    
@@ -86,23 +87,22 @@ window.addEventListener("load", function () {
         });    
         
         
-
         let id=setInterval(function () {
             countDownTimer(time,timerDiv);
             
-            if(row<10 ){
-              grid[row][column].flag=false;  //element is appended to another parent
-              grid[row++][column].appendImage(my_image);
+            if(row<10 && grid[lowerBoundry(row)][column].isEmpty()){
+              grid[row][column].flag=false;  //element is removed from that parent
               console.log(grid[row][column].flag);
-
+              grid[++row][column].appendImage(my_image);
             } 
-            if(row >= 10 || !grid[row+1 - (row>=10)][column].isEmpty())
+           else if(row >= 10 || !grid[lowerBoundry(row)][column].isEmpty())
             {
                 row =0;
                 //changing the image and the column values 
                 my_image= createRandomImage();
                 column=settingNewPosition(grid,my_image);
-                grid[row++][column].appendImage(my_image);
+                grid[row][column].flag=false;
+                grid[++row][column].appendImage(my_image);
 
             }
             console.log("timer is on ");
