@@ -77,7 +77,15 @@ const lowerBoundry=function(row){
 }
 
 const checkCollisionVertical=function(grid,row,column){
-        
+    
+    let vecticalCounter=0;
+
+   for(let r = row; r<grid.length -1;r++)
+   {
+     if(grid[r][column] == grid[r+1][column])
+         vecticalCounter++;    //counter of vectical emoji elemnts  
+   }
+   console.log(vecticalCounter);        
     
 }
 const checkCollisionHorizontally=function(grid,row,column){
