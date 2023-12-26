@@ -69,6 +69,7 @@ window.addEventListener("load", function () {
                 console.log("right")
                 // Check if moving to the right is allowed (within the grid)
                 if (column < 9) {
+                    grid[row][column].flag=false;
                     column++;
                     grid[row][column].appendImage(my_image);
                 }
@@ -77,6 +78,7 @@ window.addEventListener("load", function () {
             else if (event.key === "ArrowLeft") {
                 // Check if moving to the left is allowed (within the grid)
                 if (column > 0) {
+                    grid[row][column].flag=false;
                     column--;
                     grid[row][column].appendImage(my_image);
                 }
@@ -88,10 +90,13 @@ window.addEventListener("load", function () {
         let id=setInterval(function () {
             countDownTimer(time,timerDiv);
             
-            if(row<10){
+            if(row<10 ){
+              grid[row][column].flag=false;  //element is appended to another parent
               grid[row++][column].appendImage(my_image);
-            }
-            if(row >= 10)
+              console.log(grid[row][column].flag);
+
+            } 
+            if(row >= 10 || !grid[row+1 - (row>=10)][column].isEmpty())
             {
                 row =0;
                 //changing the image and the column values 

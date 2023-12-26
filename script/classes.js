@@ -1,4 +1,5 @@
 class Cell{
+    //#flag;
     constructor(){
         this.cell=document.createElement("div");
         this.cell.style.width="50px";
@@ -16,7 +17,7 @@ class Cell{
         this.cell.appendChild(image);
     }
     
-    
+
     cellImageNumber(){
       if(!this.flag)
          return -1; //the cell has no image
