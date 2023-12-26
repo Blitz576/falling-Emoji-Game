@@ -2,31 +2,23 @@
     width: 60px;
     height: 60px;
 }
-.container {
+.formContainer {
     background-color: rgb(0, 0, 0, 0.6);
     width: 50%;
     height: 350px;
-    margin: auto;
-    margin-top: 10%;
+    /* margin: auto; */
+    /* margin-top: 10%; */
     color: white;
     text-align: center;
     font-family: 'Times New Roman', Times, serif;
     border-radius: 20px;
-}
-
-.start {
-    background-color: rgba(239, 18, 18, 0.991);
-
-}
-
-.scoreBoard {
-    background-color: rgba(0, 0, 255, 0.819);
-
+    position: absolute;
+    top: 25%;
+    left: 25%;
 }
 
 
-.start,
-.scoreBoard,
+
 input {
     display: block;
     margin: auto;
@@ -44,12 +36,17 @@ input {
 .start {
     opacity: 0.5;
 }
-
+button{
+    position: relative;
+    top: 50px;
+}
 input {
     height: 50px;
     border-radius: 0%;
     background-color: transparent;
     border-bottom: solid 1px wheat;
+    position: relative;
+    left: 230px;
 }
 
 input:focus {
