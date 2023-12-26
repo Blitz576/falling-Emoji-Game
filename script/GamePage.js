@@ -19,7 +19,7 @@ window.addEventListener("load", function () {
    let column=settingNewPosition(grid,my_image);
    let row = 0;
     
-   
+
    
 
 
@@ -43,7 +43,8 @@ window.addEventListener("load", function () {
     hardModeButton.style.color="white";
 
     //change the song source
-    gameSound.src="audio/Dancing Line - The Chaos (Soundtrack).mp3"; 
+    gameSound.src="audio/Dancing Line - The Chaos (Soundtrack).mp3";
+
    })
 
   
@@ -89,11 +90,22 @@ window.addEventListener("load", function () {
             
             grid[row++][column].appendImage(my_image);
             
-            if(time>0 && row < 10){
+            if(row > 10)
+            {
+                row =0;
+                //changing the image and the column values 
+                my_image= createRandomImage();
+                column=settingNewPosition(grid,my_image);
+                grid[row++][column].appendImage(my_image);
+
+            }
+            console.log("timer is on ");
+            if(time>0){
                 time-=1;
-            }else{
-                gameSound.pause();
-                gameSound.currentTime=0; //restarting the song
+            }else if (time<0){
+
+                //gameSound.pause();
+                //gameSound.currentTime=0; //restarting the song
                 clearInterval(id);
             }
             
