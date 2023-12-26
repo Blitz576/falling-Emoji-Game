@@ -13,12 +13,17 @@ class Cell{
     appendToParent(parent){
       parent.appendChild(this.cell);
     }
+    removeContent(){
+      this.cell.removeChild(this.cell.childNodes[0]); //removing the image
+    }
+    
     removeImage(){
       this.flag=0;
     }
     appendImage(image){
         this.flag=1;
         this.imageIndex = this.imageSources.indexOf(image.attributes.src);
+        this.image=image;
         this.cell.appendChild(image);
     }
     
@@ -29,7 +34,8 @@ class Cell{
       if(!this.flag)
          return -1; //the cell has no image
       else{
-         this.imageIndex = this.imageSources.findIndex();
+        // console.log(this.imageIndex);
+        return this.imageIndex;
       }  
 
     }

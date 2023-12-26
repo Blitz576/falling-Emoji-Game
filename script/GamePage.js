@@ -129,6 +129,7 @@ window.addEventListener("load", function () {
             else if(row >= 10 || !grid[lowerBoundry(row)][column].isEmpty())
             {
                 checkCollisionVertical(grid,row,column);
+                checkCollisionHorizontally(grid,row,column); 
                 row =0;
                 //changing the image and the column values 
                 my_image= createRandomImage();
@@ -141,7 +142,7 @@ window.addEventListener("load", function () {
                 if(!grid[1][column].isEmpty())
                  clearInterval(id);
             }
-            console.log("timer is on ");
+            //console.log("timer is on ");
             if(time>0){
                 time-=1;
             }else if (time<0){

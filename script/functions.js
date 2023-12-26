@@ -39,7 +39,7 @@ const changeSoundButtonState=function(source,music)
 const createRandomImage=function(){
     let image=this.document.createElement("img");
     let imageSrcIndex= Math.ceil(5*Math.random()); //from 1 to 5
-    console.log(imageSrcIndex);
+    // console.log(imageSrcIndex);
     image.src=`images/${imageSrcIndex}.png`;
     return image;
 }
@@ -60,9 +60,9 @@ const fillTheGrid =function(rows,columns,parent){
 }
 
 const settingNewPosition =  function(grid , image){
-    let columnPosition = Math.round( Math.random()* grid.length);
-    
+    let columnPosition = Math.round( Math.random()* grid[0].length);
     grid[0][columnPosition].appendImage(image);
+    
     return columnPosition;
 }
 
@@ -76,27 +76,95 @@ const lowerBoundry=function(row){
     return row;
 }
 
-const checkCollisionVertical=function(grid,row,column){
-    
-    let vecticalCounter=0;
+const checkCollisionVertical = function(grid, row, column) {
+    let vecticalCounter = 0;
+    let elements=[];
+    for (let r = row; r < grid.length - 1; r++) {
+        if (grid[r][column].cellImageNumber() === grid[r + 1][column].cellImageNumber()) {
+            elements.push(grid[r][column]);
+            vecticalCounter++; // Counter of vertical emoji elements
+        }
 
-   for(let r = row; r<grid.length -1;r++)
-   {
-
-     if(grid[r][column] == grid[r+1][column]){
-         vecticalCounter++;    //counter of vectical emoji elemnts
-     }  
-   }
-
-   console.log(vecticalCounter);        
+        if(vecticalCounter == 4)
+        {
+            console.log(elements)
+            console.log("verticSucess");
+          //removing the elements  
+          for(let it =0 ;it< elements.length;it ++)
+          {
+            elements[it].removeContent();
+            elements[it].removeImage();
+          }      
+          break;
+        }
+    }
     
 }
-const checkCollisionHorizontally=function(grid,row,column){
-    if(grid[row][column]==grid[row][column+1]==grid[row][column+2]==grid[row][column+3]){
-        grid[row][column].removeImage();
-        grid[row][column+1].removeImage();
-        grid[row][column+2].removeImage();
-        grid[row][column+3].removeImage();
+
+
+const checkCollisionHorizontally = function (grid, row, column) {
+    let horizontalCounter = 0;
+    let elements = [];
+    
+    // Check to the right (next elements)
+    for (let c = column; c < grid[row].length - 1 && horizontalCounter < 4; c++) {
+        if (!grid[row][c + 1].isEmpty() && grid[row][c].cellImageNumber() === grid[row][c + 1].cellImageNumber()) {
+            elements.push(grid[row][c]);
+            horizontalCounter++;
+        } else {
+            break; // Break the loop if consecutive elements are not equal
+        }
+    }
+
+    // Check to the left (previous elements)
+    for (let c = column - 1; c >= 0 && horizontalCounter < 4; c--) {
+        if (!grid[row][c].isEmpty() && grid[row][c].cellImageNumber() === grid[row][c + 1].cellImageNumber()) {
+            elements.unshift(grid[row][c]); // Add to the beginning of the array
+            horizontalCounter++;
+        } else {
+            break; // Break the loop if consecutive elements are not equal
+        }
+    }
+
+    if (horizontalCounter === 4) {
+        // If the current element and three consecutive elements to the right or left are equal
+        console.log(elements);
+        console.log("Horizontal Success");
+        for (let it = 0; it < elements.length; it++) {
+            elements[it].removeContent();
+            elements[it].removeImage();
+        }
     }
 }
+
+
+
+
+
+// const checkCollisionHorizontally=function(grid,row,column){
+//     let horizontalCounter = 0;
+//     let elements=[];
+//     for (let c = column; c < grid[row].length - 1; c++) {
+//         if(grid[row][c+1].isEmpty())
+//            continue;
+//         if (grid[row][c].cellImageNumber() === grid[row][c+1].cellImageNumber()) {
+//             console.log("yay")
+//             elements.push(grid[row][c]);
+//             horizontalCounter++; // Counter of vertical emoji elements
+//         }
+
+//         if(horizontalCounter == 4)
+//         {
+//             console.log(elements)
+//             console.log("horizonSucess");
+//           //removing the elements  
+//           for(let it =0 ;it< elements.length;it ++)
+//           {
+//             elements[it].removeContent();
+//             elements[it].removeImage();
+//           }      
+//           break;
+//         }
+//     }
+    
 
