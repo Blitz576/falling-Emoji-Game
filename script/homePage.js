@@ -7,7 +7,9 @@ window.addEventListener("load", function () {
   let homePageSound=this.document.querySelector("audio");
   let clickSound= this.document.querySelector('#click_sound');
   
-  
+  if(localStorage.getItem('Player-Name')){
+    userName.value=localStorage.getItem('Player-Name');
+  }
   userName.addEventListener("input", function () {
     changeOpacity(userName, startButton);
   });
