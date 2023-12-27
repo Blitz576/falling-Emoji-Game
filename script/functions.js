@@ -180,3 +180,12 @@ const fireAlert=function(title,text,icon){
       });
 }
 
+function getInfoFromLocalStorage() {
+    const playersInfo = localStorage.getItem('Information');
+    return playersInfo ? JSON.parse(playersInfo) : [];
+  }
+
+  // Function to save player information to Local Storage
+  function saveInfoToLocalStorage(Information) {
+    localStorage.setItem('Information', JSON.stringify(Information));
+  }

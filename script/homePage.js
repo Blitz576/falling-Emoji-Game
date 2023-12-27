@@ -27,6 +27,17 @@ window.addEventListener("load", function () {
     if (userName.value.trim()!=""){
       clickSound.addEventListener("ended",function(){
       window.localStorage.setItem("Player-Name",userName.value);
+      const existingPlayersInfo = getInfoFromLocalStorage();
+      const existingPlayerIndex = existingPlayersInfo.findIndex(player => player.name === userName.value);
+      if(existingPlayerIndex !== -1){
+        
+        existingPlayersInfo[existingPlayerIndex].score = 0;
+      }else{
+        
+        existingPlayersInfo.push({ name: userName.value, score: 0 });
+        saveInfoToLocalStorage(existingPlayersInfo);
+
+      }
       window.location.href = "../GamePage.html";
     })
     }
