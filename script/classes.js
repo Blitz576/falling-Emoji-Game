@@ -51,3 +51,12 @@ class Cell{
     }
 }
 
+class Element{
+  static score=0;
+  constructor(image){
+    this.image=image;
+  }
+  increaseScore(){
+    Element.score++;
+  }
+}
