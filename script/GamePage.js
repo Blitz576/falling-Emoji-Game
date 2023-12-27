@@ -20,6 +20,7 @@ window.addEventListener("load", function () {
   let column = settingNewPosition(grid, my_image);
   let row = 0;
   grid[row][column].removeImage();
+  let score=0;
 
   //Easy mode
   easyModeButton.addEventListener("click", function () {
@@ -122,6 +123,7 @@ window.addEventListener("load", function () {
            {
              let verticImageIndex = searchOnImage(vecticImage,emojisImages);
              emojisBoard[verticImageIndex].innerText = Number(emojisBoard[verticImageIndex].innerText) +1 +"";
+             score+=1;
            }
 
            if(horizonImage != -1)
@@ -129,9 +131,13 @@ window.addEventListener("load", function () {
             let horizonImageIndex = searchOnImage(horizonImage,emojisImages);
             console.log(horizonImageIndex);
             emojisBoard[horizonImageIndex].innerText = (Number(emojisBoard[horizonImageIndex].innerText) + 1) +"";
+            score+=1;
           }
-          
-
+          if(score==10){
+            clearInterval(gameProcessId);
+            clearInterval(timeProcessId);
+            fireAlert("congratulation", "you are win", "success");
+          }
             row = 0;
             //changing the image and the column values
             my_image = createRandomImage();
