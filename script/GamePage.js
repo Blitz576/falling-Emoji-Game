@@ -152,7 +152,7 @@ window.addEventListener("load", function () {
                 clearInterval(id);
             }
             
-           
+           fireAlert('unfortunately','you lost','error');
             // countDownTimer(120,timer);
         }, 1000)
     })
