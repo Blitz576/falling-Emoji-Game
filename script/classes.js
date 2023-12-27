@@ -51,12 +51,25 @@ class Cell{
     }
 }
 
-class Element{
+
+
+class ScoreGame{
   static score=0;
-  constructor(image){
-    this.image=image;
+  constructor(){
+    this.image=this.createRandomImage();
   }
+  
+  createRandomImage(){
+    let image=this.document.createElement("img");
+    let imageSrcIndex= Math.ceil(5*Math.random()); //from 1 to 5
+    // console.log(imageSrcIndex);
+    image.src=`images/${imageSrcIndex}.png`;
+    return image;
+}
+
+
   increaseScore(){
     Element.score++;
   }
+
 }
