@@ -1,6 +1,6 @@
 window.addEventListener("load", function () {
     let startButton = document.querySelector("button");
-    let buttonParent = document.querySelector("#container");
+    let buttonParent = document.querySelector("#EmojisContainer");
     let easyModeButton = this.document.querySelector(".easy_mode");
     let hardModeButton = this.document.querySelector(".hard_mode");
 
@@ -142,6 +142,7 @@ window.addEventListener("load", function () {
                 if(!grid[1][column].isEmpty())
                  clearInterval(id);
             }
+
             //console.log("timer is on ");
             if(time>0){
                 time-=1;
