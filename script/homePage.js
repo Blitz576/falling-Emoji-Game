@@ -3,7 +3,7 @@ window.addEventListener("load", function () {
   let startButton = this.document.querySelector(".start");
   let userName = this.document.querySelector("input");
   let speakerButton = this.document.querySelector(".sound_icon");
-  let scoreBoardButton=this.document.querySelector(".scoreBoard")
+  let scoreBoardButton=this.document.querySelector(".score_board")
   let homePageSound=this.document.querySelector("audio");
   let clickSound= this.document.querySelector('#click_sound');
   
@@ -35,7 +35,7 @@ window.addEventListener("load", function () {
 
       
   scoreBoardButton.addEventListener("click",function(){
-   clickSound.play();
+    clickSound.play();
     clickSound.addEventListener("ended",function(){
      
     console.log("sucess");
@@ -44,4 +44,3 @@ window.addEventListener("load", function () {
 
 
 });
-

@@ -1,5 +1,4 @@
 window.addEventListener("load", function () {
-
   let startButton = document.querySelector("button");
   let buttonParent = document.querySelector("#EmojisContainer");
   let easyModeButton = this.document.querySelector(".easy_mode");
@@ -15,8 +14,7 @@ window.addEventListener("load", function () {
   let my_image = createRandomImage();
   let gameSpeed = 499; //intial speed is easy one
   let grid = fillTheGrid(10, 10, parent);
- 
- 
+
   let column = settingNewPosition(grid, my_image);
   let row = 0;
   grid[row][column].removeImage();
@@ -37,9 +35,9 @@ window.addEventListener("load", function () {
     easyModeButton.style.color = "black";
     hardModeButton.style.backgroundColor = "red";
     hardModeButton.style.color = "white";
-    
+
     gameSpeed++;
-    gameSpeed =  (gameSpeed/2) +1;   
+    gameSpeed = gameSpeed / 2 + 1;
 
     //change the song source
     gameSound.src = "audio/Dancing Line - The Chaos (Soundtrack).mp3";
@@ -93,44 +91,42 @@ window.addEventListener("load", function () {
             column = settingNewPosition(grid, my_image);
             grid[row][column].removeImage();
             grid[row][column].appendImage(my_image);
-            
+
             if (!grid[1][column].isEmpty()) {
-                killProcess=1;
-              }
+              killProcess = 1;
+            }
           }
         }
       });
 
-      let killProcess=0; //flag to the interval processes  
+      let killProcess = 0; //flag to the interval processes
       let emojisBoard = document.getElementsByClassName("score");
       let emojisImages = document.getElementsByClassName("emoji_image");
-       
-      
-      
-     //falling the emoji 
-     let gameProcessId = setInterval(function(){
-        if (row < 10 && grid[lowerBoundry(row)][column].isEmpty()) {
+
+      //falling the emoji
+      let gameProcessId = setInterval(
+        function () {
+          if (row < 10 && grid[lowerBoundry(row)][column].isEmpty()) {
             grid[row][column].removeImage(); //element is removed from that parent
-  
+
             grid[++row][column].appendImage(my_image);
           } else if (row >= 10 || !grid[lowerBoundry(row)][column].isEmpty()) {
-           let vecticImage = checkCollisionVertical(grid, row, column);
-           let horizonImage = checkCollisionHorizontally(grid, row, column);
-           
+            let vecticImage = checkCollisionVertical(grid, row, column);
+            let horizonImage = checkCollisionHorizontally(grid, row, column);
 
-           if(vecticImage != -1) //matched 
-           {
-             let verticImageIndex = searchOnImage(vecticImage,emojisImages);
-             emojisBoard[verticImageIndex].innerText = Number(emojisBoard[verticImageIndex].innerText) +1 +"";
-           }
+            if (vecticImage != -1) {
+              //matched
+              let verticImageIndex = searchOnImage(vecticImage, emojisImages);
+              emojisBoard[verticImageIndex].innerText =
+                Number(emojisBoard[verticImageIndex].innerText) + 1 + "";
+            }
 
-           if(horizonImage != -1)
-           {
-            let horizonImageIndex = searchOnImage(horizonImage,emojisImages);
-            console.log(horizonImageIndex);
-            emojisBoard[horizonImageIndex].innerText = (Number(emojisBoard[horizonImageIndex].innerText) + 1) +"";
-          }
-          
+            if (horizonImage != -1) {
+              let horizonImageIndex = searchOnImage(horizonImage, emojisImages);
+              console.log(horizonImageIndex);
+              emojisBoard[horizonImageIndex].innerText =
+                Number(emojisBoard[horizonImageIndex].innerText) + 1 + "";
+            }
 
             row = 0;
             //changing the image and the column values
@@ -138,43 +134,44 @@ window.addEventListener("load", function () {
             column = settingNewPosition(grid, my_image);
             grid[row][column].removeImage();
             grid[row][column].appendImage(my_image);
-  
+
             if (!grid[1][column].isEmpty()) {
-              killProcess=1;
+              killProcess = 1;
             }
           }
-          if(killProcess){  
+          if (killProcess) {
             clearInterval(gameProcessId);
             console.log("process was killed sucessfully");
-            if (!grid[1][column].isEmpty())   
-            fireAlert("unfortunately", "you lost", "error");
-  
+            if (!grid[1][column].isEmpty())
+              fireAlert("unfortunately", "you lost", "error");
           }
-  
-     },gameSpeed,killProcess);
+        },
+        gameSpeed,
+        killProcess
+      );
 
+      let timeProcessId = setInterval(
+        function () {
+          //killProcess=0;
+          displayTime(time, timerDiv);
 
-      let timeProcessId = setInterval(function () {
-        //killProcess=0;
-        displayTime(time, timerDiv);
+          //console.log("timer is on ");
+          if (time > 0) {
+            time -= 1;
+          } else if (time <= 0) {
+            killProcess = 1;
+          }
 
-        //console.log("timer is on ");
-        if (time > 0) {
-          time -= 1;
-        } else if (time <= 0) {
-            killProcess=1;
-        }
-
-        //check the state of the process
-        if(killProcess){  
-          clearInterval(timeProcessId);
-          console.log("process 2 was killed sucessfully");
-          if(time<=0)  
-          fireAlert("unfortunately", "time is out", "error");
-
-        }
-      }, 1000,killProcess);
+          //check the state of the process
+          if (killProcess) {
+            clearInterval(timeProcessId);
+            console.log("process 2 was killed sucessfully");
+            if (time <= 0) fireAlert("unfortunately", "time is out", "error");
+          }
+        },
+        1000,
+        killProcess
+      );
     });
-
   });
 });
