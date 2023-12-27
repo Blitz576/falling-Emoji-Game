@@ -97,22 +97,18 @@ const checkCollisionVertical = function(grid, row, column) {
 
         if(vecticalCounter == 3)
         { 
+          let imageSourceType = elements[0].cellImageNumber();    
           //removing the elements  
           for(let it =0 ;it< elements.length;it ++)
           {
             elements[it].removeContent();
             elements[it].removeImage();
           }      
-          break;
+          return imageSourceType;
         }
     }
-    
+    return -1;
 }
-
-
-
-
-
 
 
 
@@ -144,15 +140,31 @@ const checkCollisionHorizontally = function (grid, row, column) {
     if (horizontalCounter == 3) {
         // If the current element and three consecutive elements to the right or left are equal
         console.log(elements);
+        let imageSourceType = elements[0].cellImageNumber();
         console.log("Horizontal Success");
+                
         for (let it = 0; it < elements.length; it++) {
             elements[it].removeContent();
             elements[it].removeImage();
         }
+        return imageSourceType;
     }
+  return -1;
 }
 
-const fireAlert=function(title,text,icon,id){
+
+const searchOnImage = function(targetImage,images){
+    
+    for(let i=0;i<images.length;i++)
+    {
+        if(targetImage == images[i].attributes.src.value)
+            return i;
+    }
+    return -1; //not found
+
+}
+
+const fireAlert=function(title,text,icon){
     Swal.fire({
         title:title,
         text:text,
@@ -163,7 +175,6 @@ const fireAlert=function(title,text,icon,id){
       }).then((result) => {
         if (result.isConfirmed) {
           window.location.href = 'homePage.html'; // Replace with the actual home page URL
-          clearInterval(id);
         }
       });
 }

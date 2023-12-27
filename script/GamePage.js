@@ -1,4 +1,5 @@
 window.addEventListener("load", function () {
+
   let startButton = document.querySelector("button");
   let buttonParent = document.querySelector("#EmojisContainer");
   let easyModeButton = this.document.querySelector(".easy_mode");
@@ -101,7 +102,9 @@ window.addEventListener("load", function () {
       });
 
       let killProcess=0; //flag to the interval processes  
-      
+      let emojisBoard = document.getElementsByClassName("score");
+      let emojisImages = document.getElementsByClassName("emoji_image");
+       
       
       
      //falling the emoji 
@@ -111,8 +114,24 @@ window.addEventListener("load", function () {
   
             grid[++row][column].appendImage(my_image);
           } else if (row >= 10 || !grid[lowerBoundry(row)][column].isEmpty()) {
-            checkCollisionVertical(grid, row, column);
-            checkCollisionHorizontally(grid, row, column);
+           let vecticImage = checkCollisionVertical(grid, row, column);
+           let horizonImage = checkCollisionHorizontally(grid, row, column);
+           
+
+           if(vecticImage != -1) //matched 
+           {
+             let verticImageIndex = searchOnImage(vecticImage,emojisImages);
+             emojisBoard[verticImageIndex].innerText = Number(emojisBoard[verticImageIndex].innerText) +1 +"";
+           }
+
+           if(horizonImage != -1)
+           {
+            let horizonImageIndex = searchOnImage(horizonImage,emojisImages);
+            console.log(horizonImageIndex);
+            emojisBoard[horizonImageIndex].innerText = (Number(emojisBoard[horizonImageIndex].innerText) + 1) +"";
+          }
+          
+
             row = 0;
             //changing the image and the column values
             my_image = createRandomImage();

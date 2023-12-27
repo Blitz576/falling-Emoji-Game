@@ -67,7 +67,6 @@ class ScoreGame{
     return image;
 }
 
-
   increaseScore(){
     Element.score++;
   }
