@@ -141,4 +141,22 @@ const checkCollisionHorizontally = function (grid, row, column) {
     }
 }
 
+const fireAlert=function(title,text,icon){
+    Swal.fire({
+        title:title,
+        text:text,
+        icon:icon,
+      //   showCancelButton: true,
+        confirmButtonText: 'Go Home',
+      //   cancelButtonText: 'No, cancel'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = 'homePage.html'; // Replace with the actual home page URL
+        }
+      });
+}
+
+
+
+
 
