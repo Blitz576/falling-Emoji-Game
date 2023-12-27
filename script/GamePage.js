@@ -106,6 +106,7 @@ window.addEventListener("load", function () {
                     //    clearInterval(id);
                   }
             }
+
         });    
         
         
@@ -134,12 +135,13 @@ window.addEventListener("load", function () {
                 if(!grid[1][column].isEmpty())
                  clearInterval(id);
             }
+            //console.log("timer is on ");
             if(time>0){
                 time-=1;
             }else if (time<0){
 
-                gameSound.pause();
-                gameSound.currentTime=0; //restarting the song
+                //gameSound.pause();
+                //gameSound.currentTime=0; //restarting the song
                 clearInterval(id);
             }
             

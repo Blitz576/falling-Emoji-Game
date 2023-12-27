@@ -142,33 +142,3 @@ const checkCollisionHorizontally = function (grid, row, column) {
 }
 
 
-
-
-
-// const checkCollisionHorizontally=function(grid,row,column){
-//     let horizontalCounter = 0;
-//     let elements=[];
-//     for (let c = column; c < grid[row].length - 1; c++) {
-//         if(grid[row][c+1].isEmpty())
-//            continue;
-//         if (grid[row][c].cellImageNumber() === grid[row][c+1].cellImageNumber()) {
-//             console.log("yay")
-//             elements.push(grid[row][c]);
-//             horizontalCounter++; // Counter of vertical emoji elements
-//         }
-
-//         if(horizontalCounter == 4)
-//         {
-//             console.log(elements)
-//             console.log("horizonSucess");
-//           //removing the elements  
-//           for(let it =0 ;it< elements.length;it ++)
-//           {
-//             elements[it].removeContent();
-//             elements[it].removeImage();
-//           }      
-//           break;
-//         }
-//     }
-    
-
