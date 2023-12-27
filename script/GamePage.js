@@ -135,8 +135,6 @@ window.addEventListener("load", function () {
         }
       }, 20);
     });
-    // prettier
-    // ctrl+shift+p |||| <F1>
-    // > format document
+
   });
 });
