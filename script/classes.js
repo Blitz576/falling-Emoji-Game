@@ -7,7 +7,7 @@ class Cell{
         this.cell.style.height="50px";
         this.flag=0;
         this.image="";
-        this.imageSources=["0","images/1.jpg","images/2.jpg","images/3.jpg","images/4.jpg","images/5.jpg"];   //possible images based 1 index
+        this.imageIndex=0;
         // this.cell.style.backgroundColor="red";
     }
     appendToParent(parent){
@@ -22,7 +22,9 @@ class Cell{
     }
     appendImage(image){
         this.flag=1;
-        this.imageIndex = this.imageSources.indexOf(image.attributes.src);
+        this.imageIndex = image.attributes.src.value;
+        //console.log(image.attributes.src.value);
+        //console.log(this.imageIndex);
         this.image=image;
         this.cell.appendChild(image);
     }
@@ -31,10 +33,11 @@ class Cell{
 
     cellImageNumber(){
 
-      if(!this.flag)
+      if(!this.flag){
          return -1; //the cell has no image
+      }
       else{
-        // console.log(this.imageIndex);
+        //console.log(this.imageIndex);
         return this.imageIndex;
       }  
 

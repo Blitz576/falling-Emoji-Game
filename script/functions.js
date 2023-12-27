@@ -61,6 +61,7 @@ const fillTheGrid =function(rows,columns,parent){
 
 const settingNewPosition =  function(grid , image){
     let columnPosition = Math.round( Math.random()* grid[0].length);
+   // console.log(columnPosition);
     grid[0][columnPosition].appendImage(image);
     
     return columnPosition;
@@ -79,16 +80,23 @@ const lowerBoundry=function(row){
 const checkCollisionVertical = function(grid, row, column) {
     let vecticalCounter = 0;
     let elements=[];
-    for (let r = row; r < grid.length - 1; r++) {
+    for (let r = row; r < grid.length-1; r++) {
         if (grid[r][column].cellImageNumber() === grid[r + 1][column].cellImageNumber()) {
-            elements.push(grid[r][column]);
+            console.log(grid[r][column].cellImageNumber());
+            console.log(grid[r+1][column].cellImageNumber());
+            // console.log("yay"); //console.log of equal elements
+            //elements.push(grid[r][column]);
             vecticalCounter++; // Counter of vertical emoji elements
+            // console.log(vecticalCounter); //console.log of vertical counter
+        }
+        else {
+            break; //break if there's no stack of equal elements
         }
 
-        if(vecticalCounter == 4)
+        if(vecticalCounter == 3)
         {
-            console.log(elements)
-            console.log("verticSucess");
+            // console.log(elements)    //console.log of elements
+            // console.log("verticSucess");  //console.log of message 
           //removing the elements  
           for(let it =0 ;it< elements.length;it ++)
           {
@@ -106,27 +114,30 @@ const checkCollisionHorizontally = function (grid, row, column) {
     let horizontalCounter = 0;
     let elements = [];
     
+    elements.push(grid[row][column]);
     // Check to the right (next elements)
-    for (let c = column; c < grid[row].length - 1 && horizontalCounter < 4; c++) {
+    for (let c = column; (c < grid[row].length - 1 && horizontalCounter < 3) ; c++) {
         if (!grid[row][c + 1].isEmpty() && grid[row][c].cellImageNumber() === grid[row][c + 1].cellImageNumber()) {
-            elements.push(grid[row][c]);
+            elements.push(grid[row][c+1]);
             horizontalCounter++;
+            //console.log("next");  //console.log of horizontal counter
         } else {
             break; // Break the loop if consecutive elements are not equal
         }
     }
 
     // Check to the left (previous elements)
-    for (let c = column - 1; c >= 0 && horizontalCounter < 4; c--) {
+    for (let c = column - 1; (c >= 0 && horizontalCounter < 3) ; c--) {
         if (!grid[row][c].isEmpty() && grid[row][c].cellImageNumber() === grid[row][c + 1].cellImageNumber()) {
             elements.unshift(grid[row][c]); // Add to the beginning of the array
             horizontalCounter++;
+            //console.log("next");  //console.log of horizontal counter
         } else {
             break; // Break the loop if consecutive elements are not equal
         }
     }
 
-    if (horizontalCounter === 4) {
+    if (horizontalCounter == 3) {
         // If the current element and three consecutive elements to the right or left are equal
         console.log(elements);
         console.log("Horizontal Success");

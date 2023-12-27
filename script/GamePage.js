@@ -13,7 +13,7 @@ window.addEventListener("load", function () {
     
     let parent=this.document.querySelector("#board");
     let my_image= createRandomImage(); 
-    let grid=fillTheGrid(11,10,parent);
+    let grid=fillTheGrid(10,10,parent);
     //childo.appendImage(my_image); //pushing into the parent div
     
     let column=settingNewPosition(grid,my_image);
