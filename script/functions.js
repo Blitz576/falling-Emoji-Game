@@ -66,6 +66,7 @@ const fillTheGrid =function(rows,columns,parent){
 const settingNewPosition =  function(grid , image){
     let columnPosition = Math.round( Math.random()* grid[0].length);
    // console.log(columnPosition);
+   columnPosition -= (columnPosition >= grid[0].length);
     grid[0][columnPosition].appendImage(image);
     
     return columnPosition;
