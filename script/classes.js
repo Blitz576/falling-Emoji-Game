@@ -53,7 +53,7 @@ class Cell{
 
 
 
-class Element{
+class ScoreGame{
   static score=0;
   constructor(){
     this.image=this.createRandomImage();

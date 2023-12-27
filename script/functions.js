@@ -6,7 +6,7 @@ function changeOpacity(input, button) {
     }
 }
 
-function countDownTimer(time, element) {
+function displayTime(time, element) {
     var minutes = Math.floor(time / 60);
     var seconds = time % 60;
     if (seconds < 10) {
@@ -141,7 +141,7 @@ const checkCollisionHorizontally = function (grid, row, column) {
     }
 }
 
-const fireAlert=function(title,text,icon){
+const fireAlert=function(title,text,icon,id){
     Swal.fire({
         title:title,
         text:text,
@@ -152,11 +152,7 @@ const fireAlert=function(title,text,icon){
       }).then((result) => {
         if (result.isConfirmed) {
           window.location.href = 'homePage.html'; // Replace with the actual home page URL
+          clearInterval(id);
         }
       });
 }
-
-
-
-
-
