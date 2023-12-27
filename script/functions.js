@@ -80,23 +80,19 @@ const lowerBoundry=function(row){
 const checkCollisionVertical = function(grid, row, column) {
     let vecticalCounter = 0;
     let elements=[];
+    elements.push(grid[row][column]);  //intial state
+
     for (let r = row; r < grid.length-1; r++) {
         if (grid[r][column].cellImageNumber() === grid[r + 1][column].cellImageNumber()) {
-            console.log(grid[r][column].cellImageNumber());
-            console.log(grid[r+1][column].cellImageNumber());
-            // console.log("yay"); //console.log of equal elements
-            //elements.push(grid[r][column]);
-            vecticalCounter++; // Counter of vertical emoji elements
-            // console.log(vecticalCounter); //console.log of vertical counter
+            elements.push(grid[r+1][column]);
+            vecticalCounter++;
         }
         else {
             break; //break if there's no stack of equal elements
         }
 
         if(vecticalCounter == 3)
-        {
-            // console.log(elements)    //console.log of elements
-            // console.log("verticSucess");  //console.log of message 
+        { 
           //removing the elements  
           for(let it =0 ;it< elements.length;it ++)
           {
@@ -120,18 +116,15 @@ const checkCollisionHorizontally = function (grid, row, column) {
         if (!grid[row][c + 1].isEmpty() && grid[row][c].cellImageNumber() === grid[row][c + 1].cellImageNumber()) {
             elements.push(grid[row][c+1]);
             horizontalCounter++;
-            //console.log("next");  //console.log of horizontal counter
         } else {
-            break; // Break the loop if consecutive elements are not equal
+            break;
         }
     }
 
-    // Check to the left (previous elements)
     for (let c = column - 1; (c >= 0 && horizontalCounter < 3) ; c--) {
         if (!grid[row][c].isEmpty() && grid[row][c].cellImageNumber() === grid[row][c + 1].cellImageNumber()) {
             elements.unshift(grid[row][c]); // Add to the beginning of the array
             horizontalCounter++;
-            //console.log("next");  //console.log of horizontal counter
         } else {
             break; // Break the loop if consecutive elements are not equal
         }
