@@ -115,7 +115,7 @@ window.addEventListener("load", function () {
             // }
             // checkCollisionVertical(grid,row,column);
         });    
-        
+        let flag=0;
         
         let id=setInterval(function () {
             countDownTimer(time,timerDiv);
@@ -145,16 +145,28 @@ window.addEventListener("load", function () {
             //console.log("timer is on ");
             if(time>0){
                 time-=1;
-            }else if (time<0){
+            }else if (time<=0){
 
                 //gameSound.pause();
                 //gameSound.currentTime=0; //restarting the song
+               
                 clearInterval(id);
+                
+                flag=1;
             }
-            
-           fireAlert('unfortunately','you lost','error');
+           
+
+           
             // countDownTimer(120,timer);
         }, 1000)
+        setTimeout(function(){
+            if(flag==1){
+            
+                fireAlert('unfortunately','you lost','error');
+    
+            }
+        },1000*121)
+        
     })
 })
 
