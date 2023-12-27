@@ -92,7 +92,10 @@ window.addEventListener("load", function () {
             column = settingNewPosition(grid, my_image);
             grid[row][column].removeImage();
             grid[row][column].appendImage(my_image);
-
+            
+            if (!grid[1][column].isEmpty()) {
+                killProcess=1;
+              }
           }
         }
       });
