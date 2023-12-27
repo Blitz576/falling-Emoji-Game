@@ -1,8 +1,8 @@
 window.addEventListener("load", function () {
-    let startButton = document.querySelector("button");
-    let buttonParent = document.querySelector("#container");
-    let easyModeButton = this.document.querySelector(".easy_mode");
-    let hardModeButton = this.document.querySelector(".hard_mode");
+  let startButton = document.querySelector("button");
+  let buttonParent = document.querySelector("#container");
+  let easyModeButton = this.document.querySelector(".easy_mode");
+  let hardModeButton = this.document.querySelector(".hard_mode");
 
   let gameSound = this.document.querySelector("#game_play");
   let click_sound = this.document.querySelector("#click_sound");
@@ -76,91 +76,65 @@ window.addEventListener("load", function () {
           }
         }
 
-            //// -----------------------test test-----------
-            else if(event.key ==="ArrowDown"){
-                if(row<10 && grid[lowerBoundry(row)][column].isEmpty()){
-                    grid[row][column].removeImage();  //element is removed from that parent
-                    
-                    grid[++row][column].appendImage(my_image);
-                  } 
-                 else if(row >= 10 || !grid[lowerBoundry(row)][column].isEmpty())
-                  {
-                      row =0;
-                      //changing the image and the column values 
-                      my_image= createRandomImage();
-                      column=settingNewPosition(grid,my_image);
-                      grid[row][column].removeImage();
-                      grid[row][column].appendImage(my_image);
-      
-      
-                      
-                    //   if(!grid[1][column].isEmpty())
-                    //    clearInterval(id);
-                  }
-            }
-            // if(grid[row][column]==grid[row+1][column]==grid[row+2][column]==grid[row+3][column]){
-            //     grid[row][column].removeImage();
-            //     grid[row+1][column].removeImage();
-            //     grid[row+2][column].removeImage();
-            //     grid[row+3][column].removeImage();
-            // }
-            // checkCollisionVertical(grid,row,column);
-        });    
-        let flag=0;
-        
-        let id=setInterval(function () {
-            countDownTimer(time,timerDiv);
-            
-            
-            if(row<10 && grid[lowerBoundry(row)][column].isEmpty()){
-                grid[row][column].removeImage();  //element is removed from that parent
-                
-                grid[++row][column].appendImage(my_image);
-            } 
-            else if(row >= 10 || !grid[lowerBoundry(row)][column].isEmpty())
-            {
-                checkCollisionVertical(grid,row,column);
-                checkCollisionHorizontally(grid,row,column); 
-                row =0;
-                //changing the image and the column values 
-                my_image= createRandomImage();
-                column=settingNewPosition(grid,my_image);
-                grid[row][column].removeImage();
-                grid[row][column].appendImage(my_image);
-                
-                
-                
-                if(!grid[1][column].isEmpty())
-                 clearInterval(id);
-            }
-            //console.log("timer is on ");
-            if(time>0){
-                time-=1;
-            }else if (time<=0){
+        //// -----------------------test test-----------
+        else if (event.key === "ArrowDown") {
+          if (row < 10 && grid[lowerBoundry(row)][column].isEmpty()) {
+            grid[row][column].removeImage(); //element is removed from that parent
 
-                //gameSound.pause();
-                //gameSound.currentTime=0; //restarting the song
-               
-                clearInterval(id);
-                
-                flag=1;
-            }
-           
+            grid[++row][column].appendImage(my_image);
+          } else if (row >= 10 || !grid[lowerBoundry(row)][column].isEmpty()) {
+            row = 0;
+            //changing the image and the column values
+            my_image = createRandomImage();
+            column = settingNewPosition(grid, my_image);
+            grid[row][column].removeImage();
+            grid[row][column].appendImage(my_image);
 
-           
-            // countDownTimer(120,timer);
-        }, 1000)
-        setTimeout(function(){
-            if(flag==1){
-            
-                fireAlert('unfortunately','you lost','error');
-    
-            }
-        },1000*121)
-        
-    })
-})
+            //   if(!grid[1][column].isEmpty())
+            //    clearInterval(id);
+          }
+        }
+      });
 
+      let killProcess=0; //flag to the interval process  
 
+      let processId = setInterval(function () {
+        killProcess=0;
+        displayTime(time, timerDiv);
 
-})
+        if (row < 10 && grid[lowerBoundry(row)][column].isEmpty()) {
+          grid[row][column].removeImage(); //element is removed from that parent
+
+          grid[++row][column].appendImage(my_image);
+        } else if (row >= 10 || !grid[lowerBoundry(row)][column].isEmpty()) {
+          checkCollisionVertical(grid, row, column);
+          checkCollisionHorizontally(grid, row, column);
+          row = 0;
+          //changing the image and the column values
+          my_image = createRandomImage();
+          column = settingNewPosition(grid, my_image);
+          grid[row][column].removeImage();
+          grid[row][column].appendImage(my_image);
+
+          if (!grid[1][column].isEmpty()) {
+            killProcess=1;
+          }
+        }
+
+        //console.log("timer is on ");
+        if (time > 0) {
+          time -= 1;
+        } else if (time <= 0) {
+            killProcess=1;
+        }
+        if(killProcess){  
+          clearInterval(processId);
+          console.log("process was killed sucessfully");  
+          fireAlert("unfortunately", "you lost", "error");
+
+        }
+      }, 20);
+    });
+
+  });
+});
