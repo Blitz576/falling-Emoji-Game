@@ -19,6 +19,9 @@ function displayTime(time, element) {
 }
 
 
+
+
+
 const changeSoundButtonState=function(source,music)
 {
        
@@ -39,6 +42,7 @@ const changeSoundButtonState=function(source,music)
 const createRandomImage=function(){
     let image=this.document.createElement("img");
     let imageSrcIndex= Math.ceil(5*Math.random()); //from 1 to 5
+    imageSrcIndex -= (imageSrcIndex >5) //avoiding 6 case
     // console.log(imageSrcIndex);
     image.src=`images/${imageSrcIndex}.png`;
     return image;
@@ -106,6 +110,13 @@ const checkCollisionVertical = function(grid, row, column) {
 }
 
 
+
+
+
+
+
+
+
 const checkCollisionHorizontally = function (grid, row, column) {
     let horizontalCounter = 0;
     let elements = [];
@@ -156,3 +167,4 @@ const fireAlert=function(title,text,icon,id){
         }
       });
 }
+

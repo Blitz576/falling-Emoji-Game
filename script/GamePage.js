@@ -1,6 +1,6 @@
 window.addEventListener("load", function () {
   let startButton = document.querySelector("button");
-  let buttonParent = document.querySelector("#container");
+  let buttonParent = document.querySelector("#EmojisContainer");
   let easyModeButton = this.document.querySelector(".easy_mode");
   let hardModeButton = this.document.querySelector(".hard_mode");
 
@@ -12,10 +12,10 @@ window.addEventListener("load", function () {
 
   let parent = this.document.querySelector("#board");
   let my_image = createRandomImage();
-
+  let gameSpeed = 499; //intial speed is easy one
   let grid = fillTheGrid(10, 10, parent);
-
-  let isEnded = 0;
+ 
+ 
   let column = settingNewPosition(grid, my_image);
   let row = 0;
   grid[row][column].removeImage();
@@ -36,6 +36,9 @@ window.addEventListener("load", function () {
     easyModeButton.style.color = "black";
     hardModeButton.style.backgroundColor = "red";
     hardModeButton.style.color = "white";
+    
+    gameSpeed++;
+    gameSpeed =  (gameSpeed/2) +1;   
 
     //change the song source
     gameSound.src = "audio/Dancing Line - The Chaos (Soundtrack).mp3";
@@ -90,36 +93,48 @@ window.addEventListener("load", function () {
             grid[row][column].removeImage();
             grid[row][column].appendImage(my_image);
 
-            //   if(!grid[1][column].isEmpty())
-            //    clearInterval(id);
           }
         }
       });
 
-      let killProcess=0; //flag to the interval process  
-
-      let processId = setInterval(function () {
-        killProcess=0;
-        displayTime(time, timerDiv);
-
+      let killProcess=0; //flag to the interval processes  
+      
+      
+      
+     //falling the emoji 
+     let gameProcessId = setInterval(function(){
         if (row < 10 && grid[lowerBoundry(row)][column].isEmpty()) {
-          grid[row][column].removeImage(); //element is removed from that parent
-
-          grid[++row][column].appendImage(my_image);
-        } else if (row >= 10 || !grid[lowerBoundry(row)][column].isEmpty()) {
-          checkCollisionVertical(grid, row, column);
-          checkCollisionHorizontally(grid, row, column);
-          row = 0;
-          //changing the image and the column values
-          my_image = createRandomImage();
-          column = settingNewPosition(grid, my_image);
-          grid[row][column].removeImage();
-          grid[row][column].appendImage(my_image);
-
-          if (!grid[1][column].isEmpty()) {
-            killProcess=1;
+            grid[row][column].removeImage(); //element is removed from that parent
+  
+            grid[++row][column].appendImage(my_image);
+          } else if (row >= 10 || !grid[lowerBoundry(row)][column].isEmpty()) {
+            checkCollisionVertical(grid, row, column);
+            checkCollisionHorizontally(grid, row, column);
+            row = 0;
+            //changing the image and the column values
+            my_image = createRandomImage();
+            column = settingNewPosition(grid, my_image);
+            grid[row][column].removeImage();
+            grid[row][column].appendImage(my_image);
+  
+            if (!grid[1][column].isEmpty()) {
+              killProcess=1;
+            }
           }
-        }
+          if(killProcess){  
+            clearInterval(gameProcessId);
+            console.log("process was killed sucessfully");
+            if (!grid[1][column].isEmpty())   
+            fireAlert("unfortunately", "you lost", "error");
+  
+          }
+  
+     },gameSpeed,killProcess);
+
+
+      let timeProcessId = setInterval(function () {
+        //killProcess=0;
+        displayTime(time, timerDiv);
 
         //console.log("timer is on ");
         if (time > 0) {
@@ -127,13 +142,16 @@ window.addEventListener("load", function () {
         } else if (time <= 0) {
             killProcess=1;
         }
+
+        //check the state of the process
         if(killProcess){  
-          clearInterval(processId);
-          console.log("process was killed sucessfully");  
-          fireAlert("unfortunately", "you lost", "error");
+          clearInterval(timeProcessId);
+          console.log("process 2 was killed sucessfully");
+          if(time<=0)  
+          fireAlert("unfortunately", "time is out", "error");
 
         }
-      }, 20);
+      }, 1000,killProcess);
     });
 
   });
