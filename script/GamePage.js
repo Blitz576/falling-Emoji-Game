@@ -14,7 +14,6 @@ window.addEventListener("load", function () {
     let parent=this.document.querySelector("#board");
     let my_image= createRandomImage(); 
     let grid=fillTheGrid(10,10,parent);
-    //childo.appendImage(my_image); //pushing into the parent div
     
     let column=settingNewPosition(grid,my_image);
     let row = 0;
@@ -107,13 +106,6 @@ window.addEventListener("load", function () {
                     //    clearInterval(id);
                   }
             }
-            // if(grid[row][column]==grid[row+1][column]==grid[row+2][column]==grid[row+3][column]){
-            //     grid[row][column].removeImage();
-            //     grid[row+1][column].removeImage();
-            //     grid[row+2][column].removeImage();
-            //     grid[row+3][column].removeImage();
-            // }
-            // checkCollisionVertical(grid,row,column);
         });    
         
         
@@ -142,13 +134,12 @@ window.addEventListener("load", function () {
                 if(!grid[1][column].isEmpty())
                  clearInterval(id);
             }
-            //console.log("timer is on ");
             if(time>0){
                 time-=1;
             }else if (time<0){
 
-                //gameSound.pause();
-                //gameSound.currentTime=0; //restarting the song
+                gameSound.pause();
+                gameSound.currentTime=0; //restarting the song
                 clearInterval(id);
             }
             
