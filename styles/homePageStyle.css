@@ -70,6 +70,9 @@ input:focus {
     text-shadow: 3px 2px 4px rgba(0, 0, 0, 0.5); 
     animation: moveUpDown 2s ease-in-out infinite alternate;
 }
+.alert_message{
+    color: red;
+}
 
 /*Game Title animate*/
 @keyframes moveUpDown {

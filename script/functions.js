@@ -1,4 +1,4 @@
-function changeOpacity(input, button) {
+const changeOpacity = function (input, button) {
     if (input.value.trim())
         button.style.opacity = 1;
     else {
@@ -6,7 +6,7 @@ function changeOpacity(input, button) {
     }
 }
 
-function displayTime(time, element) {
+const displayTime = function (time, element) {
     var minutes = Math.floor(time / 60);
     var seconds = time % 60;
     if (seconds < 10) {
@@ -17,7 +17,19 @@ function displayTime(time, element) {
     }
     element.innerHTML = `${minutes}:${seconds}`;
 }
-
+const checkValidUsername = function (username) {
+    const usernameRegex = /^[a-zA-Z_]+$/;
+    if (!username) {
+        return false;
+    }
+    if (!usernameRegex.test(username)) {
+        return false;
+    }
+    if (username.length < 2) {
+        return false;
+    }
+    return true;
+}
 
 
 
@@ -167,7 +179,7 @@ const fireAlert = function (title, text, icon) {
         text: text,
         icon: icon,
         //   showCancelButton: true,
-        confirmButtonText: 'Go Home',
+        confirmButtonText: 'Ok',
         //   cancelButtonText: 'No, cancel'
     }).then((result) => {
         if (result.isConfirmed) {
@@ -176,18 +188,18 @@ const fireAlert = function (title, text, icon) {
     });
 }
 // Function to get array of player information from Local Storage
-function getInfoFromLocalStorage() {
+const getInfoFromLocalStorage=function() {
     const playersInfo = localStorage.getItem('Information');
     return playersInfo ? JSON.parse(playersInfo) : [];
 }
 
 // Function to save player information to Local Storage
-function saveInfoToLocalStorage(Information) {
+const saveInfoToLocalStorage=function(Information) {
     localStorage.setItem('Information', JSON.stringify(Information));
 }
 
 // Function to display all players information in a table
-function displayAllPlayersInfo(playersInfo,body) {
+const displayAllPlayersInfo=function(playersInfo, body) {
     const tableBody = document.querySelector(body);
     tableBody.innerHTML = '';
 

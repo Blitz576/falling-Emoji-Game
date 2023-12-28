@@ -6,11 +6,13 @@ window.addEventListener("load", function () {
   let scoreBoardButton=this.document.querySelector(".score_board")
   let homePageSound=this.document.querySelector("audio");
   let clickSound= this.document.querySelector('#click_sound');
-  
+  let alertMessage= this.document.querySelector('.alert_message')
   if(localStorage.getItem('Player-Name')){
     userName.value=localStorage.getItem('Player-Name');
   }
   userName.addEventListener("input", function () {
+   
+
     changeOpacity(userName, startButton);
   });
 
@@ -24,7 +26,13 @@ window.addEventListener("load", function () {
 
   startButton.addEventListener("click", function () {
     clickSound.play();
-    if (userName.value.trim()!=""){
+    // if (checkValidUsername(userName.value)) {
+    //   alert("ok");
+    // }else{
+    //   alert("no");
+    // }
+
+    if (checkValidUsername(userName.value.trim())){
       clickSound.addEventListener("ended",function(){
       window.localStorage.setItem("Player-Name",userName.value);
       const existingPlayersInfo = getInfoFromLocalStorage();
@@ -40,6 +48,8 @@ window.addEventListener("load", function () {
       }
       window.location.href = "../GamePage.html";
     })
+    }else{
+      alertMessage.innerHTML='Name must be contain more than 2 characters';
     }
   });
   
