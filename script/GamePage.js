@@ -118,8 +118,8 @@ window.addEventListener("load", function () {
   
             grid[++row][column].appendImage(my_image);
           } else if (row >= 10 || !grid[lowerBoundry(row)][column].isEmpty()) {
-           let vecticImage = checkCollisionVertical(grid, row, column);
-           let horizonImage = checkCollisionHorizontally(grid, row, column);
+           let vecticImage = checkMatchingVertically(grid, row, column);
+           let horizonImage = checkHorizontallyMatching(grid, row, column);
            
 
            if(vecticImage != -1) //matched 
