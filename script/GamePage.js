@@ -1,23 +1,47 @@
 window.addEventListener("load", function () {
-  let startButton = document.querySelector("button");
-  let buttonParent = document.querySelector("#EmojisContainer");
-  let easyModeButton = this.document.querySelector(".easy_mode");
-  let hardModeButton = this.document.querySelector(".hard_mode");
-
-  let gameSound = this.document.querySelector("#game_play");
-  let click_sound = this.document.querySelector("#click_sound");
-
-  let nameDiv = this.document.querySelector("#username");
-  nameDiv.innerHTML += localStorage.getItem("Player-Name");
-
+   let startButton = document.querySelector("button");
+   let buttonParent = document.querySelector("#EmojisContainer");
+   let easyModeButton = this.document.querySelector(".easy_mode");
+   let hardModeButton = this.document.querySelector(".hard_mode");
+    
+   let gameSound = this.document.querySelector("#game_play");
+   let click_sound = this.document.querySelector("#click_sound");
+    
+    
+  let users = new Map() // better performance
   let parent = this.document.querySelector("#board");
   let my_image = createRandomImage();
   let gameSpeed = 499; //intial speed is easy one
   let grid = fillTheGrid(10, 10, parent);
-
+  
   let column = settingNewPosition(grid, my_image);
   let row = 0;
   grid[row][column].removeImage();
+  
+  
+  let score=0;
+  
+  
+  let nameDiv = this.document.querySelector("#username");
+  nameDiv.innerHTML += localStorage.getItem("Player-Name");
+
+
+  let scoreDiv = this.document.querySelector("#totalScore");
+
+  if(users.has(nameDiv.innerText.innerText)){
+      console.log("nah");
+      console.log(users[nameDiv.innerText])
+      score = users[nameDiv.innerText];
+}
+else {
+      console.log("yay");
+      score = 0;
+      users.set(nameDiv.innerText,0); //new user logged in 
+  }
+  console.log(score);
+  scoreDiv.innerHTML=`Score : ${score}`;
+  
+  
 
   //Easy mode
   easyModeButton.addEventListener("click", function () {
@@ -114,20 +138,32 @@ window.addEventListener("load", function () {
             let vecticImage = checkCollisionVertical(grid, row, column);
             let horizonImage = checkCollisionHorizontally(grid, row, column);
 
-            if (vecticImage != -1) {
-              //matched
-              let verticImageIndex = searchOnImage(vecticImage, emojisImages);
-              emojisBoard[verticImageIndex].innerText =
-                Number(emojisBoard[verticImageIndex].innerText) + 1 + "";
-            }
 
-            if (horizonImage != -1) {
-              let horizonImageIndex = searchOnImage(horizonImage, emojisImages);
-              console.log(horizonImageIndex);
-              emojisBoard[horizonImageIndex].innerText =
-                Number(emojisBoard[horizonImageIndex].innerText) + 1 + "";
-            }
+           if(vecticImage != -1) //matched 
+           {
+             let verticImageIndex = searchOnImage(vecticImage,emojisImages);
+             emojisBoard[verticImageIndex].innerText = Number(emojisBoard[verticImageIndex].innerText) +1 +"";
+             score+=1;
+             scoreDiv.innerHTML=`Score : ${score}`;
+           }
 
+           if(horizonImage != -1)
+           {
+            let horizonImageIndex = searchOnImage(horizonImage,emojisImages);
+            console.log(horizonImageIndex);
+            emojisBoard[horizonImageIndex].innerText = (Number(emojisBoard[horizonImageIndex].innerText) + 1) +"";
+            score+=1;
+            scoreDiv.innerHTML=`Score : ${score}`;
+          }
+          if(score==10){
+            clearInterval(gameProcessId);
+            clearInterval(timeProcessId);
+            //updating the score
+            let lastScore = users.get(nameDiv.innerText);
+            users.set(nameDiv.innerText,lastScore+10);
+
+            fireAlert("congratulation", "you won", "success");
+          }
             row = 0;
             //changing the image and the column values
             my_image = createRandomImage();

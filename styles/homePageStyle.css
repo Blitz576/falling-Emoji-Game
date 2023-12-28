@@ -40,8 +40,10 @@ input {
 .start {
     opacity: 0.5;
 }
+.button_container{
+    display: inline-block;
+}
 button{
-    display: inline;
     width: fit-content;
     position: relative;
     top: 50px;
