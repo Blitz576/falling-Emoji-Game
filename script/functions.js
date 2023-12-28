@@ -93,28 +93,53 @@ const lowerBoundry = function (row) {
     return row;
 }
 
-const checkCollisionVertical = function (grid, row, column) {
+function handleVerticalFalling(grid, row, column) {
+    for (let r = row - 1; (r >= 0 && !grid[r][column].isEmpty()); r--) {
+            let emoji = grid[r][column].cell.childNodes[0];
+            grid[r][column].removeContent();
+            grid[r][column].removeImage();
+
+            let newRow = r+1; //bottom row
+            // Move the emoji down till the busy place
+            while(newRow < 10 && grid[newRow][column].isEmpty()){
+            grid[newRow][column].appendImage(emoji);
+            }
+    }
+}
+
+ function handleHorizontalFalling(grid, row, column) {
+    for (let c = column; (c <grid[row].length &&!grid[row][c].isEmpty()) ; c++) {
+        handleVerticalFalling(grid,row,c);        
+    }
+}
+
+
+
+const checkMatchingVertically = function(grid, row, column) {
     let vecticalCounter = 0;
-    let elements = [];
+    let elements=[];
     elements.push(grid[row][column]);  //intial state
 
-    for (let r = row; r < grid.length - 1; r++) {
+    for (let r = row; r < grid.length-1; r++) {
         if (grid[r][column].cellImageNumber() === grid[r + 1][column].cellImageNumber()) {
-            elements.push(grid[r + 1][column]);
+            elements.push(grid[r+1][column]);
             vecticalCounter++;
         }
         else {
             break; //break if there's no stack of equal elements
         }
 
-        if (vecticalCounter == 3) {
-            let imageSourceType = elements[0].cellImageNumber();
-            //removing the elements  
-            for (let it = 0; it < elements.length; it++) {
-                elements[it].removeContent();
-                elements[it].removeImage();
-            }
-            return imageSourceType;
+        if(vecticalCounter == 3)
+        { 
+          let imageSourceType = elements[0].cellImageNumber();    
+          //removing the elements  
+          for(let it =0 ;it< elements.length;it ++)
+          {
+            elements[it].removeContent();
+            elements[it].removeImage();
+          }
+          handleVerticalFalling(grid,row,column);      
+          return imageSourceType;
         }
     }
     return -1;
@@ -123,22 +148,22 @@ const checkCollisionVertical = function (grid, row, column) {
 
 
 
-const checkCollisionHorizontally = function (grid, row, column) {
+const checkHorizontallyMatching = function (grid, row, column) {
     let horizontalCounter = 0;
     let elements = [];
-
+    
     elements.push(grid[row][column]);
     // Check to the right (next elements)
-    for (let c = column; (c < grid[row].length - 1 && horizontalCounter < 3); c++) {
+    for (let c = column; (c < grid[row].length - 1 && horizontalCounter < 3) ; c++) {
         if (!grid[row][c + 1].isEmpty() && grid[row][c].cellImageNumber() === grid[row][c + 1].cellImageNumber()) {
-            elements.push(grid[row][c + 1]);
+            elements.push(grid[row][c+1]);
             horizontalCounter++;
         } else {
             break;
         }
     }
 
-    for (let c = column - 1; (c >= 0 && horizontalCounter < 3); c--) {
+    for (let c = column - 1; (c >= 0 && horizontalCounter < 3) ; c--) {
         if (!grid[row][c].isEmpty() && grid[row][c].cellImageNumber() === grid[row][c + 1].cellImageNumber()) {
             elements.unshift(grid[row][c]); // Add to the beginning of the array
             horizontalCounter++;
@@ -152,16 +177,16 @@ const checkCollisionHorizontally = function (grid, row, column) {
         console.log(elements);
         let imageSourceType = elements[0].cellImageNumber();
         console.log("Horizontal Success");
-
+                
         for (let it = 0; it < elements.length; it++) {
             elements[it].removeContent();
             elements[it].removeImage();
         }
+        handleHorizontalFalling(grid,row,column);
         return imageSourceType;
     }
-    return -1;
+  return -1;
 }
-
 
 const searchOnImage = function (targetImage, images) {
 
@@ -178,9 +203,7 @@ const fireAlert = function (title, text, icon) {
         title: title,
         text: text,
         icon: icon,
-        //   showCancelButton: true,
         confirmButtonText: 'Ok',
-        //   cancelButtonText: 'No, cancel'
     }).then((result) => {
         if (result.isConfirmed) {
             window.location.href = 'homePage.html'; // Replace with the actual home page URL
@@ -212,3 +235,4 @@ const displayAllPlayersInfo=function(playersInfo, body) {
         cellScore.textContent = player.score;
     });
 }
+
