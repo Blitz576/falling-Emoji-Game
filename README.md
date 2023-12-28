@@ -37,3 +37,33 @@ The code is thoroughly documented to ensure readability and maintainability. Eac
 ## Object-Oriented Approach
 
 The code follows an object-oriented approach to enhance modularity and reusability. Objects and classes are used to represent different components of the game.
+
+
+# Game Rules
+
+- The game starts when the user clicks the start button.
+- A timer of 2 minutes begins counting down.
+- Emojis fall randomly, and the player must match 4 horizontally or vertically to make them disappear.
+- The game ends when the time runs out or the emojis fill the entire box.
+- Player wins by making 10 matches before the timer expires.
+
+## Dialog Libraries
+
+Dialog libraries are utilized for displaying messages. Built-in prompts and alerts are not used to provide a better user experience.
+
+## Local Storage
+
+Local storage is employed to remember the user's name and display their last score if they have played before.
+
+# How to Play
+
+1. Open the game folder in your vsCode editior to access and select to run the `homePage.html` page with you live server to acess to the home page.
+2. Enter your name and click the play button.
+3. On the game page, click the start button to begin the game.
+4. Match emojis horizontally or vertically to score points.
+5. Win by making 10 matches before the timer runs out.
+6. Dialogs will inform you of your victory or defeat.
+
+
+
+
