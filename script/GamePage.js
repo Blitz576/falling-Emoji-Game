@@ -84,6 +84,8 @@ window.addEventListener("load", function () {
           }
         }
 
+        
+      });
 
       let killProcess=0; //flag to the interval processes  
       let emojisBoard = document.getElementsByClassName("score");
