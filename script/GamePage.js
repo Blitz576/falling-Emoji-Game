@@ -22,8 +22,8 @@ window.addEventListener("load", function () {
   let column = settingNewPosition(grid, my_image);
   let row = 0;
   grid[row][column].removeImage();
-  let score=existingPlayersInfo[existingPlayerIndex].score;
-  scoreDiv.innerHTML+=`Score : ${score}`;
+  let score=0;  //intial game score
+  scoreDiv.innerHTML+=` ${existingPlayersInfo[existingPlayerIndex].score}`; //score coming form data base
 
   //Easy mode
   easyModeButton.addEventListener("click", function () {
@@ -128,7 +128,7 @@ window.addEventListener("load", function () {
              emojisBoard[verticImageIndex].innerText = Number(emojisBoard[verticImageIndex].innerText) +1 +"";
              score+=1;
              scoreDiv.innerHTML=`Score : ${score}`;
-             existingPlayersInfo[existingPlayerIndex].score=score;
+             existingPlayersInfo[existingPlayerIndex].score= Number(existingPlayersInfo[existingPlayerIndex].score)+score;
              saveInfoToLocalStorage(existingPlayersInfo);
            }
 
