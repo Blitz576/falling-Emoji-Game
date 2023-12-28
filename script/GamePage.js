@@ -10,7 +10,6 @@ window.addEventListener("load", function () {
 
   let nameDiv = this.document.querySelector("#username");
   let scoreDiv = this.document.querySelector("#totalScore");
-  // nameDiv.innerHTML += localStorage.getItem("Player-Name");
   const existingPlayersInfo = getInfoFromLocalStorage();
   const existingPlayerIndex = existingPlayersInfo.findIndex(player => player.name === localStorage.getItem("Player-Name"));
   nameDiv.innerHTML+=existingPlayersInfo[existingPlayerIndex].name;
@@ -22,8 +21,9 @@ window.addEventListener("load", function () {
   let column = settingNewPosition(grid, my_image);
   let row = 0;
   grid[row][column].removeImage();
-  let score=0;  //intial game score
-  scoreDiv.innerHTML+=` ${existingPlayersInfo[existingPlayerIndex].score}`; //score coming form data base
+  let score=existingPlayersInfo[existingPlayerIndex].score;  //intial game score
+  scoreDiv.innerHTML=`Score: ${score}`; //score coming form data base
+  let totalScore=0;
 
   //Easy mode
   easyModeButton.addEventListener("click", function () {
@@ -127,8 +127,9 @@ window.addEventListener("load", function () {
              let verticImageIndex = searchOnImage(vecticImage,emojisImages);
              emojisBoard[verticImageIndex].innerText = Number(emojisBoard[verticImageIndex].innerText) +1 +"";
              score+=1;
+             totalScore+=1;
              scoreDiv.innerHTML=`Score : ${score}`;
-             existingPlayersInfo[existingPlayerIndex].score= Number(existingPlayersInfo[existingPlayerIndex].score)+score;
+             existingPlayersInfo[existingPlayerIndex].score=score;
              saveInfoToLocalStorage(existingPlayersInfo);
            }
 
@@ -138,11 +139,12 @@ window.addEventListener("load", function () {
             console.log(horizonImageIndex);
             emojisBoard[horizonImageIndex].innerText = (Number(emojisBoard[horizonImageIndex].innerText) + 1) +"";
             score+=1;
+            totalScore+=1;
             scoreDiv.innerHTML=`Score : ${score}`;
             existingPlayersInfo[existingPlayerIndex].score=score;
             saveInfoToLocalStorage(existingPlayersInfo);
           }
-          if(score==10){
+          if(totalScore==10){
             clearInterval(gameProcessId);
             clearInterval(timeProcessId);
             fireAlert("congratulation", "you won", "success");
