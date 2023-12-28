@@ -94,7 +94,10 @@ const lowerBoundry = function (row) {
 }
 
 function handleVerticalFalling(grid, row, column) {
-    for (let r = row - 1; (r >= 0 && !grid[r][column].isEmpty()); r--) {
+    console.log(row);
+    for (let r = row - 1; r >= 0; r--) {
+        if(!grid[r][column].isEmpty()){
+            console.log("done first case")
             let emoji = grid[r][column].cell.childNodes[0];
             grid[r][column].removeContent();
             grid[r][column].removeImage();
@@ -102,14 +105,16 @@ function handleVerticalFalling(grid, row, column) {
             let newRow = r+1; //bottom row
             // Move the emoji down till the busy place
             while(newRow < 10 && grid[newRow][column].isEmpty()){
-            grid[newRow][column].appendImage(emoji);
-            }
+                grid[newRow++][column].appendImage(emoji);
+             }             
+        }
     }
 }
 
  function handleHorizontalFalling(grid, row, column) {
-    for (let c = column; (c <grid[row].length &&!grid[row][c].isEmpty()) ; c++) {
-        handleVerticalFalling(grid,row,c);        
+    console.log("function is on ");
+    for (let c = column +1; c < grid[0].length ; c++) {
+          handleVerticalFalling(grid,row,c);
     }
 }
 
@@ -137,8 +142,7 @@ const checkMatchingVertically = function(grid, row, column) {
           {
             elements[it].removeContent();
             elements[it].removeImage();
-          }
-          handleVerticalFalling(grid,row,column);      
+          }      
           return imageSourceType;
         }
     }
@@ -182,6 +186,7 @@ const checkHorizontallyMatching = function (grid, row, column) {
             elements[it].removeContent();
             elements[it].removeImage();
         }
+        console.log("calling function now")        
         handleHorizontalFalling(grid,row,column);
         return imageSourceType;
     }
