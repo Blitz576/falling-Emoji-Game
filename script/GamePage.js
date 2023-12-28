@@ -84,26 +84,6 @@ window.addEventListener("load", function () {
           }
         }
 
-        //// -----------------------test test-----------
-        else if (event.key === "ArrowDown") {
-          if (row < 10 && grid[lowerBoundry(row)][column].isEmpty()) {
-            grid[row][column].removeImage(); //element is removed from that parent
-
-            grid[++row][column].appendImage(my_image);
-          } else if (row >= 10 || !grid[lowerBoundry(row)][column].isEmpty()) {
-            row = 0;
-            //changing the image and the column values
-            my_image = createRandomImage();
-            column = settingNewPosition(grid, my_image);
-            grid[row][column].removeImage();
-            grid[row][column].appendImage(my_image);
-            
-            if (!grid[1][column].isEmpty()) {
-                killProcess=1;
-              }
-          }
-        }
-      });
 
       let killProcess=0; //flag to the interval processes  
       let emojisBoard = document.getElementsByClassName("score");
