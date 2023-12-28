@@ -9,8 +9,11 @@ window.addEventListener("load", function () {
   let click_sound = this.document.querySelector("#click_sound");
 
   let nameDiv = this.document.querySelector("#username");
-  nameDiv.innerHTML += localStorage.getItem("Player-Name");
-
+  let scoreDiv = this.document.querySelector("#totalScore");
+  // nameDiv.innerHTML += localStorage.getItem("Player-Name");
+  const existingPlayersInfo = getInfoFromLocalStorage();
+  const existingPlayerIndex = existingPlayersInfo.findIndex(player => player.name === localStorage.getItem("Player-Name"));
+  nameDiv.innerHTML+=existingPlayersInfo[existingPlayerIndex].name;
   let parent = this.document.querySelector("#board");
   let my_image = createRandomImage();
   let gameSpeed = 499; //intial speed is easy one
@@ -19,9 +22,8 @@ window.addEventListener("load", function () {
   let column = settingNewPosition(grid, my_image);
   let row = 0;
   grid[row][column].removeImage();
-  let score=0;
-  let scoreDiv = this.document.querySelector("#totalScore");
-  scoreDiv.innerHTML=`Score : ${score}`;
+  let score=existingPlayersInfo[existingPlayerIndex].score;
+  scoreDiv.innerHTML+=`Score : ${score}`;
 
   //Easy mode
   easyModeButton.addEventListener("click", function () {
@@ -126,6 +128,8 @@ window.addEventListener("load", function () {
              emojisBoard[verticImageIndex].innerText = Number(emojisBoard[verticImageIndex].innerText) +1 +"";
              score+=1;
              scoreDiv.innerHTML=`Score : ${score}`;
+             existingPlayersInfo[existingPlayerIndex].score=score;
+             saveInfoToLocalStorage(existingPlayersInfo);
            }
 
            if(horizonImage != -1)
@@ -135,6 +139,8 @@ window.addEventListener("load", function () {
             emojisBoard[horizonImageIndex].innerText = (Number(emojisBoard[horizonImageIndex].innerText) + 1) +"";
             score+=1;
             scoreDiv.innerHTML=`Score : ${score}`;
+            existingPlayersInfo[existingPlayerIndex].score=score;
+            saveInfoToLocalStorage(existingPlayersInfo);
           }
           if(score==10){
             clearInterval(gameProcessId);

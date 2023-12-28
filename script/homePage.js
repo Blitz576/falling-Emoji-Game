@@ -31,7 +31,7 @@ window.addEventListener("load", function () {
       const existingPlayerIndex = existingPlayersInfo.findIndex(player => player.name === userName.value);
       if(existingPlayerIndex !== -1){
         
-        existingPlayersInfo[existingPlayerIndex].score = 0;
+        // existingPlayersInfo[existingPlayerIndex].score = 0;
       }else{
         
         existingPlayersInfo.push({ name: userName.value, score: 0 });
