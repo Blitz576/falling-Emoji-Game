@@ -1,0 +1,32 @@
+body {
+    background-image: url(../images/emojiesss.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+tr{
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+ th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #fdff8f;
+    color: rgb(0, 0, 0);
+}
