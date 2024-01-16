@@ -72,3 +72,23 @@ class ScoreGame{
   }
 
 }
+
+class Grid{
+  
+  constructor(rows,columns,parent){
+    this.grid = []; //intial matrix
+    for (let i = 0; i < rows; i++) {
+        this.grid[i] = [];  //each element is an array
+        for (let j = 0; j < columns; j++) {
+            let newCell = new Cell();  //creating new child class each time
+            newCell.appendToParent(parent);
+            grid[i][j] = newCell;
+        }
+    }
+    
+
+  }
+  
+
+
+}

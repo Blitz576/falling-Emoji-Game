@@ -31,6 +31,7 @@ window.addEventListener("load", function () {
     hardModeButton.style.color = "black";
     easyModeButton.style.backgroundColor = "green";
     easyModeButton.style.color = "white";
+    gameSpeed=499;
     //change the song source
     gameSound.src = "audio/Dancing Line - The Plains (Soundtrack).mp3";
   });
@@ -68,7 +69,7 @@ window.addEventListener("load", function () {
         if (event.key === "ArrowRight") {
           console.log("right");
           // Check if moving to the right is allowed (within the grid)
-          if (column < 9) {
+          if (column+1 <= 9 &&grid[row][column+1].isEmpty()) {
             grid[row][column].removeImage();
             column++;
             grid[row][column].appendImage(my_image);
@@ -77,7 +78,7 @@ window.addEventListener("load", function () {
         // Keydown event to move the image to the left
         else if (event.key === "ArrowLeft") {
           // Check if moving to the left is allowed (within the grid)
-          if (column > 0) {
+          if (column-1 >= 0 &&grid[row][column-1].isEmpty()) {
             grid[row][column].removeImage();
             column--;
             grid[row][column].appendImage(my_image);

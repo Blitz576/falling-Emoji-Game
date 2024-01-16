@@ -65,9 +65,9 @@ const fillTheGrid = function (rows, columns, parent) {
     for (let i = 0; i < rows; i++) {
         grid[i] = [];  //each element is an array
         for (let j = 0; j < columns; j++) {
-            let childo = new Cell();  //creating new child class each time
-            childo.appendToParent(parent);
-            grid[i][j] = childo;
+            let newCell = new Cell();  //creating new child class each time
+            newCell.appendToParent(parent);
+            grid[i][j] = newCell;
         }
     }
 
@@ -94,7 +94,7 @@ const lowerBoundry = function (row) {
 }
 
 function handleVerticalFalling(grid, row, column) {
-    console.log(row);
+    console.log("the row is"+row);
     for (let r = row - 1; r >= 0; r--) {
         if(!grid[r][column].isEmpty()){
             console.log("done first case")
@@ -111,10 +111,21 @@ function handleVerticalFalling(grid, row, column) {
     }
 }
 
- function handleHorizontalFalling(grid, row, column) {
+ function handleHorizontalFalling(grid, row, column,isSuffix) {
     console.log("function is on ");
-    for (let c = column +1; c < grid[0].length ; c++) {
+    if(!isSuffix){ //should i go reverse
+    //go to the left
+    for (let c = column ; (c < column+4 ) ; c++) {
+          console.log("column number"+ c);
           handleVerticalFalling(grid,row,c);
+    }
+    }
+    else{
+        //go to the right 
+        for (let c = column ; (c > column-4 ) ; c--) {
+            console.log("column number"+ c);
+            handleVerticalFalling(grid,row,c);
+      }   
     }
 }
 
@@ -156,6 +167,7 @@ const checkHorizontallyMatching = function (grid, row, column) {
     let horizontalCounter = 0;
     let elements = [];
     
+    let isSuffix=0;
     elements.push(grid[row][column]);
     // Check to the right (next elements)
     for (let c = column; (c < grid[row].length - 1 && horizontalCounter < 3) ; c++) {
@@ -166,12 +178,14 @@ const checkHorizontallyMatching = function (grid, row, column) {
             break;
         }
     }
-
+    
     for (let c = column - 1; (c >= 0 && horizontalCounter < 3) ; c--) {
         if (!grid[row][c].isEmpty() && grid[row][c].cellImageNumber() === grid[row][c + 1].cellImageNumber()) {
             elements.unshift(grid[row][c]); // Add to the beginning of the array
+            isSuffix =1;
             horizontalCounter++;
         } else {
+            isSuffix =0;
             break; // Break the loop if consecutive elements are not equal
         }
     }
@@ -187,7 +201,7 @@ const checkHorizontallyMatching = function (grid, row, column) {
             elements[it].removeImage();
         }
         console.log("calling function now")        
-        handleHorizontalFalling(grid,row,column);
+        handleHorizontalFalling(grid,row,column ,isSuffix);
         return imageSourceType;
     }
   return -1;
@@ -240,4 +254,3 @@ const displayAllPlayersInfo=function(playersInfo, body) {
         cellScore.textContent = player.score;
     });
 }
-
